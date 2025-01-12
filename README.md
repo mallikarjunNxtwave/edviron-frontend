@@ -1,3 +1,14 @@
+## app.js
+index file is main file it routing page according to given url
+
+## styled components
+
+i am using styled components for styling webpage
+
+https://edviron-backend-jh1s.onrender.com/transactions for getting all transactions
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
