@@ -16,11 +16,11 @@ const Home = () => {
     const [apiStatus, setApiStatus] = useState(apiStatuses.initial)
     const [customOrderId, setCustomOrderId] = useState('')
     const [transactions, setTransactions] = useState([])
-    const [url, setUrl] = useState('https://edviron-backend-jh1s.onrender.com/transactions')
+    const [url, setUrl] = useState('https://edviron-backend-jh1s.onrender.com')
 
     const GetTransactions = async () => {
         setApiStatus(apiStatuses.inprogress)
-        const response = await fetch(url)
+        const response = await fetch(`${url}/transactions`)
         console.log(response)
         if(response.ok){
             const data = await response.json()
@@ -28,6 +28,18 @@ const Home = () => {
             setApiStatus(apiStatuses.success)
         }else {
             setApiStatus(apiStatuses.failure)
+        }
+    }
+
+    const getTransactionsWithSchoolId = async () => {
+        
+    }
+
+    const getTransactionWithOrderId = async () => {
+        const response = await fetch(`${url}/transaction/${customOrderId}`)
+        if(response.ok){
+            const data = await response.json()
+            setTransactions(data.transaction)
         }
     }
 
@@ -80,7 +92,7 @@ const Home = () => {
             <Heading>Edviron</Heading>
             <FilteringContainer>
                 <SearchBox>
-                    <SearchButton>
+                    <SearchButton onClick={getTransactionWithOrderId}>
                     <FaSearch style={{height: '20px'}}/>
                     </SearchButton>
                     <InputBox placeholder='Custom Order Id' value={customOrderId} onChange={(event) => handleStateChange(event, setCustomOrderId)} />
